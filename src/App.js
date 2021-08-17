@@ -1,7 +1,7 @@
 import Header from "./components/Header";
 import Tasks from "./components/Tasks";
+import AppTask from "./components/AddTask"
 import { useState } from "react";
-
 
 function App() {
   const [tasks, setTasks] = useState([
@@ -25,10 +25,33 @@ function App() {
     },
   ]);
 
+  const deleteTask = (id) => {
+    setTasks(tasks.filter((task) => task.id !== id));
+    console.log("Delete task with ID: ", id);
+  };
+
+  const toggleReminder = (id) => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, reminder: !task.reminder } : task
+      )
+    );
+    console.log(id);
+  };
+
   return (
     <div className="container">
       <Header></Header>
-      <Tasks tasks={tasks}></Tasks>
+      <AppTask></AppTask>
+      {tasks.length > 0 ? (
+        <Tasks
+          tasks={tasks}
+          onDelete={deleteTask}
+          onToggle={toggleReminder}
+        ></Tasks>
+      ) : (
+        "There are no tasks"
+      )}
     </div>
   );
 }
