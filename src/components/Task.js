@@ -13,7 +13,6 @@ const Task = ({ task, onDelete, onToggle }) => {
           onClick={() => onDelete(task.id)}
         />
       </h3>
-      <p>The reminder status is {task.reminder ? "False" : "True"}</p>
       <p>{task.day}</p>
     </div>
   );

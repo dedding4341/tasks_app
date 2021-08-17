@@ -39,10 +39,16 @@ function App() {
     console.log(id);
   };
 
+  const addTask = (task) => {
+    task.id = tasks.length + 1
+    setTasks([...tasks, task])
+    console.log(task)
+  }
+
   return (
     <div className="container">
       <Header></Header>
-      <AppTask></AppTask>
+      <AppTask onAdd={addTask}></AppTask>
       {tasks.length > 0 ? (
         <Tasks
           tasks={tasks}
